@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20151007143841_change_timestamps_in_user_groups.rb

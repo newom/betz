@@ -1,0 +1,26 @@
+= provide(:title, @user.un)
+
+%h1
+	= gravatar_for @user
+	= @user.un
+
+%h2 open betz
+
+%table#openbets{:class => "table table-hover", :border => "1", :align => "center"}
+	%tr
+		%th Opponent
+		%th Bet
+		%th Wager
+		%th Winner
+		%th Paid?
+		%th Group
+	%tbody
+		- @open_bets.each do |bet|
+			%tr
+				%td #{opponent(@user, bet)}
+				%td #{bet.prop}
+				%td #{bet.wager}
+				%td #{bet.winner} 
+				%td #{bet.paid}
+				%td #{bet.group_id} 
+</table>

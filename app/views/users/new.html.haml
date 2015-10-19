@@ -1,0 +1,19 @@
+%h1 Sign up!
+
+= form_for :users, :url => create_user_path, :class => "form-horizontal", :id => "new_user_form" do
+	%div{:class => "form-group"}
+		= label :user, :un, "User Name"
+		= text_field :user, :un
+	%div{:class => "form-group"}
+		= label :user, :email, "Email"
+		= text_field :user, :email
+	%div{:class => "form-group"}
+		= label :user, :password, "Password"
+		= password_field :user, :password
+	%div{:class => "form-group"}
+		= label :user, :password_confirmation, "Confirm Password"
+		= password_field :user, :password_confirmation
+	%div{:class => "form-group"}
+		= label :user, :mobile, "Cell Number"
+		= text_field :user, :mobile
+	= submit_tag 'Create My Account'

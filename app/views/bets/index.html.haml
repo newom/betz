@@ -1,0 +1,21 @@
+
+%h1 Open Betz
+
+Hello, #{@current_user.un}
+
+%table#openbets{:class => "table table-hover", :border => "1", :align => "center"}
+	%tr
+		%th Opponent
+		%th Bet
+		%th Wager
+		%th Winner
+		%th Paid
+	%tbody
+	
+		%tr
+			%td @user
+			%td @bet
+			%td @wager
+			%td @winner 
+			%td @paid 
+</table>
