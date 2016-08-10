@@ -1,0 +1,63 @@
+= provide(:title, @bet.prop)
+
+%h1 #{@group}
+
+
+- if @bet.accepted == TRUE
+	%h2 #{@user2.un} accepted #{@user1.un}'s prop, #{@bet.prop}
+- else @bet.accepted == FALSE
+	%h2 #{@user1.un} proposed bet to #{@user2.un}:
+
+<p> 
+
+- if @show_accept == TRUE
+
+	= form_for :@bet, :url => accept_bet_path, :class => "form_horizontal", :border => "1", :align => "center" do |f|	
+		%div{:class => "form-group"}
+			= f.label :prop, "Prop:"
+			= "#{@bet.prop}"
+
+		%div{:class => "form-group"}
+			= f.label :wager, "Wager:"
+			=  "#{@bet.wager}"
+
+		%input{:class => "form-group",:type => "hidden", :value => @bet.id, :name => :@id} 
+
+		= submit_tag "accept", :class => "btn btn-default pull-left", type: "submit", value: "Accept"
+		= submit_tag "counter", :class => "btn btn-default pull-left", type: "submit", value: "Counter"
+		= submit_tag "reject", :class => "btn btn-default pull-left", type: "submit", value: "Reject"
+
+- else
+
+	= form_for :@bet, :url => accept_bet_path, :class => "form_horizontal", :border => "1", :align => "center" do |f|	
+		%div{:class => "form-group"}
+			= f.label :prop, "Prop:"
+			= "#{@bet.prop}"
+
+		%div{:class => "form-group"}
+			= f.label :wager, "Wager:"
+			=  "#{@bet.wager}"
+
+		%div{:class => "form-group"}
+			= f.label :paid, "Paid:"
+			- if @bet.paid == TRUE
+				The bet has been paid.
+			- else
+				= link_to "Unpaid", pay_bet_url(@bet.id)
+
+		%div{:class => "form-group"}
+			= f.label :winner, "Winner:"
+			- if @bet.winner == nil
+				= f.collection_select(:winner, @users , :id, :un, :prompt => "Winner Pending")
+			- else
+				#{@winner}
+				<p>
+				= f.collection_select(:winner, @users, :id, :un, :prompt => "Change Winner")
+		%input{:class => "form-group",:type => "hidden", :value => @bet.id, :name => :@id}
+
+		= submit_tag "update", :class => "btn btn-default pull-left", type: "submit", value: "Update"
+
+
+
+
+<p>

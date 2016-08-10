@@ -1,0 +1,31 @@
+test: &default
+
+  # Credentials for REST APIs
+  client_id: Acey6elucPzwGainfkjDAJ8neUCZuMRV8C722TzGJfBxEV3ncJ8PWRMsQdO8z0fQexObNGV0a5hPvmEd
+  client_secret: EBI29CI8KIt8m9QtR3DCrfu5gPbeIxG3PR_sVrxyYLpnjEH78BZLf7cRLRY6rXv3xBRAXGO7snX3_643
+
+  # Mode can be 'live' or 'sandbox'
+  mode: sandbox
+
+  # Credentials for Classic APIs
+  app_id: APP-80W284485P519543T
+  username: attyowenmurphy-facilitator_api1.gmail.com
+  password: BGEEFMZQ3GFFBDZT
+  signature: A2Nrloz3u3YaqrAYMQ4lJlvClUQQAW1GzsAWS.Vcx12w-xDWYqT1mWdp
+  # # With Certificate
+  # cert_path: "config/cert_key.pem"
+  sandbox_email_address: attyowenmurphy-@gmail.com
+
+  # # IP Address
+  # ip_address: 127.0.0.1
+  # # HTTP Proxy
+  # http_proxy: http://proxy-ipaddress:3129/
+
+  # verbose_logging: true
+
+development:
+  <<: *default
+
+production:
+  <<: *default
+  mode: live

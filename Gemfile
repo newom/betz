@@ -54,3 +54,10 @@ gem 'bcrypt'
 gem 'twitter-bootstrap-rails'
 gem 'less-rails'
 gem 'therubyracer'
+
+gem 'figaro'
+
+gem "tabs_on_rails"
+
+gem 'paypal-sdk-adaptivepayments'
+

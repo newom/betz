@@ -1,0 +1,35 @@
+%h1 Settingz
+
+%div{:class => "row"}
+	%div{:class => "col-md-6 col-md-offset-3"}
+		= form_for @user do
+			
+			- if @user.errors.any?
+				%div{:id => "error_explanation"}
+					%div{:class => "alert alert-danger"}
+						The proposition could not be sent because:
+					%ul
+						- @user.errors.full_messages.each do |msg|
+							%li  #{msg}
+
+			%div{:class => "form-group"}
+				= label :user, :un, "User Name"
+				= text_field :user, :un
+			%div{:class => "form-group"}
+				= label :user, :email, "Email"
+				= text_field :user, :email
+			%div{:class => "form-group"}
+				= label :user, :password, "Password"
+				= password_field :user, :password
+			%div{:class => "form-group"}
+				= label :user, :password_confirmation, "Confirm Password"
+				= password_field :user, :password_confirmation
+			%div{:class => "form-group"}
+				= label :user, :mobile, "Cell Number"
+				= text_field :user, :mobile
+			= submit_tag 'Update'
+		<p>
+		%div{:class =>"gravatar_edit"}
+			= gravatar_for @user
+			= link_to("change", "http://www.gravatar.com/emails", :target => "_blank")
+

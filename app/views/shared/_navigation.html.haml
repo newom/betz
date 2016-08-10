@@ -4,10 +4,10 @@
 		%nav
 			%ul{:class => "nav navbar-nav navbar right"}
 				%li
-					= link_to "Home", "root"
+					= link_to "Home", current_user
 				%li
-					= link_to "Users", "#"
+					= link_to "Propose Bet", new_bet_path
 				%li	
-					= link_to "Settings", "#"
+					= link_to "Settings", edit_user
 				%li	
 					= link_to "Log Out", logout_path, :method => "delete", :class => "pull-right"

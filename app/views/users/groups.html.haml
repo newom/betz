@@ -1,0 +1,39 @@
+= provide(:title, @user.un)
+
+%h1
+	= gravatar_for @user
+	= @user.un
+
+%ul{:class => "nav nav-pills"}
+	%li
+		= link_to "Overview", user_path
+	%li
+		= link_to "Pending", user_path
+	%li
+		= link_to "Open", open_user_path(@user)
+	%li{:class => "active"}
+		= link_to "Groups", groups_user_path
+
+%h2 groupz
+
+%table#groupstats{:class => "table table-hover", :border => "1", :align => "center"}
+	%tr
+		%th Group
+		%th Rank
+		%th Record
+		%th Winning Percentage
+		%th Winnings
+	%tbody
+		- @groups.each do |group|
+			%tr
+				%td 
+					= link_to "#{group.name}", group_url(group.id)
+				%td #{@ranks[group.id]}
+				%td #{record(group, @user.id)}
+				%td
+					- if win_percentage_group(@user, group).nan? 
+						0.000 
+					- else 
+						#{number_with_precision(win_percentage_group(@user, group), :precision => 3)}
+				%td #{number_to_currency(winnings(@user, group))}
+</table>

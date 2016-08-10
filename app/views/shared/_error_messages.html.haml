@@ -1,7 +1,6 @@
- - if @user.errors.any?
- 	.error_explanation
- 		%h3
- 			= pluralize(target.errors.count, "error")
- 		%ul
- 			- target.errors.full_messages.each do |msg|
- 				%li
+- if bet.errors.any?
+	%h2= pluralize(@talent.errors.count, error)
+	"prohibited this be from being saved"
+	%ul
+		-bet.errors.full_messages.each do |msg|
+		%li= msg

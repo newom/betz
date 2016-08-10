@@ -4,23 +4,30 @@
 	= gravatar_for @user
 	= @user.un
 
-%h2 open betz
+%ul{:class => "nav nav-pills"}
+	%li{:class => "active"}
+		= link_to "Overview", user_path
+	%li
+		= link_to "Pending Bets", pending_user_path(@user)
+	%li
+		= link_to "Open Bets", open_user_path(@user)
+	%li
+		= link_to "Groups", groups_user_path
 
-%table#openbets{:class => "table table-hover", :border => "1", :align => "center"}
+%h2 statz
+
+%table#pendingbets{:class => "table table-hover", :border => "1", :align => "center"}
 	%tr
-		%th Opponent
-		%th Bet
-		%th Wager
-		%th Winner
-		%th Paid?
-		%th Group
+		%th All-time Record
+		%th All-time Winning percentage
+		%th All-time Rank
+		%th All Time Winningz
+
 	%tbody
-		- @open_bets.each do |bet|
-			%tr
-				%td #{opponent(@user, bet)}
-				%td #{bet.prop}
-				%td #{bet.wager}
-				%td #{bet.winner} 
-				%td #{bet.paid}
-				%td #{bet.group_id} 
+		%tr
+			%td #{@stats["win"]} - #{@stats["loss"]}
+			%td #{number_with_precision(win_percentage(@user.id), :precision => 3)}
+			%td #{@stats["rank"]}
+			%td #{number_to_currency(@winnings)}
+
 </table>

@@ -1,0 +1,25 @@
+= provide(:title, current_user.un)
+
+%h1
+	= gravatar_for current_user
+	= current_user.un
+%h2
+	= @group.name
+%table#pendingbets{:class => "table table-hover", :border => "1", :align => "center"}
+	%tr
+		%th Rank
+		%th User
+		%th Record
+		%th Winning Percentage
+		%th Group Winnings
+
+	%tbody
+		- @stats.each do |key, value|
+			%tr
+				%td #{key}
+				%td #{name(@stats[key][0])}
+				%td #{@stats[key][1]}
+				%td #{number_with_precision(@stats[key][2], :precision => 3)}
+				%td #{number_to_currency(@stats[key][3])}
+
+</table>

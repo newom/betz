@@ -1,0 +1,29 @@
+.container
+	%h1 Fresh Prop
+	%div{:class => "row"}
+		%div{:class => "col-md-6 col-md-offset-3"}
+			= form_for :@bet, :url => create_bet_path, :class => "form-horizontal", :id => "bet_form" do |f|
+				
+				- if @bet.errors.any?
+					%div{:id => "error_explanation"}
+						%div{:class => "alert alert-danger"}
+							The proposition could not be sent because:
+						%ul
+							- @bet.errors.full_messages.each do |msg|
+								%li  #{msg}
+
+				%div{:class => "form-group"}
+					= f.label :opponent, "Opponent:"
+					= f.collection_select(:opponent, @opponents, :id, :un)
+				%div{:class => "form-group"}
+					= f.label :prop, "Proposition:"
+					= f.text_field :prop, :class => "form-control", :id => "prop", :placeholder => "Place ya's bet."
+				%div{:class => "form-group"}
+					= f.label :category, "Category:"
+					= f.text_field :category, :class => "form-control", :id => "category", :placeholder => "Fresh Cat"
+				%div{:class => "form-group"}
+					= f.label :wager, "Wager:"
+					= f.text_field :wager, :class => "form-control", :id => "prop", :placeholder => "$1,000,000"
+				
+				%div{:class => "form-group"}	
+					= f.submit "Go Get Em!", :class => "btn btn-default pull-right"

@@ -5,9 +5,29 @@
 		= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
 		= javascript_include_tag 'application', 'data-turbolinks-track' => true
 		= csrf_meta_tags
-		= render 'shared/navigation'
+		/ = render 'shared/navigation' unless @disable_nav
 
 	%body
+		%header{:class => "navbar navbar-fixed-top navbar-inverse"}
+			= link_to "Betz", root_path, id: 'logo'
+			%div{:class => "container"}
+				%nav
+					%ul{:class => "nav navbar-nav navbar right"}
+						- if logged_in?
+							%li
+								= link_to "Home", current_user
+							%li
+								= link_to "Propose Bet", new_bet_path
+							%li
+								= link_to "History", current_user
+							%li	
+								= link_to "Settings", edit_user_path(current_user)
+							%li	
+								= link_to "Log Out", logout_path, :method => "delete", :class => "pull-right"
+						- else
+							%li
+								= link_to "Log in", login_path
+
 		%div{:id => "main-container", :class => "container"}
 			
 			%div{:class => "row"}

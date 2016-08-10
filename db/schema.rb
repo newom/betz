@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007144217) do
+ActiveRecord::Schema.define(version: 20160604130746) do
 
   create_table "bets", force: :cascade do |t|
     t.string   "user1",      limit: 255
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20151007144217) do
     t.datetime "updated_at"
     t.string   "date",       limit: 255
     t.integer  "group_id",   limit: 4
+    t.boolean  "accepted",   limit: 1
+    t.integer  "proposer",   limit: 4
   end
 
   create_table "groups", force: :cascade do |t|
@@ -46,6 +48,11 @@ ActiveRecord::Schema.define(version: 20151007144217) do
     t.datetime "updated_at"
     t.datetime "created_at"
     t.string   "remember_digest", limit: 255
+    t.integer  "wins",            limit: 4,   default: 0
+    t.integer  "losses",          limit: 4,   default: 0
+    t.float    "win_percentage",  limit: 24
+    t.float    "money_won",       limit: 24,  default: 0.0
+    t.float    "money_lost",      limit: 24,  default: 0.0
   end
 
 end

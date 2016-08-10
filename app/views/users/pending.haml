@@ -1,0 +1,43 @@
+= provide(:title, @user.un)
+
+%h1
+	= gravatar_for @user
+	= @user.un
+
+%ul{:class => "nav nav-pills"}
+	%li
+		= link_to "Overview", user_path
+	%li{:class => "active"}
+		= link_to "Pending", pending_user_path(@user)
+	%li
+		= link_to "Open", open_user_path(@user)
+	%li
+		= link_to "Groups", groups_user_path
+%h2 pending betz
+
+%table#pendingbets{:class => "table table-hover", :border => "1", :align => "center"}
+	%tr
+		%th Opponent
+		%th Bet
+		%th Wager
+		%th Group
+		%th Accept?
+	%tbody
+		- @pending_bets.each do |bet|
+			%tr
+				%td #{opponent(@user, bet)}
+				%td 
+					= link_to "#{bet.prop}", bet_url(bet.id)
+				%td #{number_to_currency(bet.wager)}
+				%td #{group_name(bet)}
+				%td 
+					= form_for :bet, :url => accept_bet_path, :class => "form_horizontal", :border => "1", :align => "center" do
+
+						%div{:class => "form-group"}
+						
+						%input{:class => "form-group",:type => "hidden", :value => bet.id, :name => :@id} 
+
+						= submit_tag "accept", :class => "btn btn-default pull-left", type: "submit", value: "Accept"
+						= submit_tag "counter", :class => "btn btn-default pull-left", type: "submit", value: "Counter"
+						= submit_tag "reject", :class => "btn btn-default pull-left", type: "submit", value: "Reject"
+</table>

@@ -1,0 +1,35 @@
+= provide(:title, @user.un)
+
+%h1
+	= gravatar_for @user
+	= @user.un
+
+%ul{:class => "nav nav-pills"}
+	%li
+		= link_to "Pending", root_path
+	%li
+		= link_to "Open", root_path
+	%li{:class => "active"}
+		= link_to "Groups", root_path
+
+%h2 pending betz
+
+%table#pendingbets{:class => "table table-hover", :border => "1", :align => "center"}
+	%tr
+		%th Opponent
+		%th Bet
+		%th Wager
+		%th Winner
+		%th Paid?
+		%th Group
+	%tbody
+		- @pending_bets.each do |bet|
+			%tr
+				%td #{opponent(@user, bet)}
+				%td 
+					= link_to "#{bet.prop}", bet_url(bet.id)
+				%td #{bet.wager}
+				%td #{winner?(bet)} 
+				%td #{paid?(bet)}
+				%td #{bet.group_id} 
+</table>
