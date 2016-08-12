@@ -22,7 +22,8 @@ class BetsController < ApplicationController
     @users = [@user1, @user2]
     
     if @bet.winner != nil
-      @winner = User.find(@bet.winner).un 
+      @winner = User.find(@bet.winner).un
+      #delete this comment
     end  
     
     if @bet.accepted == FALSE
