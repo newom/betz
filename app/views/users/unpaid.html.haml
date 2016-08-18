@@ -1,0 +1,75 @@
+= provide(:title, @user.un)
+
+%h1
+	= gravatar_for @user
+	= @user.un
+
+%ul{:class => "nav nav-pills"}
+	%li
+		= link_to "Overview", user_path
+	%li
+		= link_to "Open Bets", open_user_path(@user)
+	%li{:class => "active"}
+		= link_to "Unpaid Bets", unpaid_user_path(@user)
+	%li
+		= link_to "Groups", groups_user_path
+
+%h2 Unpaid Bets
+
+%h3 You are owed:
+
+%table#owed{:class => "table table-hover", :border => "1", :align => "center"}
+	%tr
+		%th Opponent
+		%th Group
+		%th Bet
+		%th Winner
+		%th Owed
+
+		%tbody
+		- @owed.each do |bet|
+			%tr
+				%td #{opponent(@user, bet)}
+				%td #{group_name(bet)}
+				%td 
+					= link_to "#{bet.prop}", bet_url(bet.id)
+				%td
+					- if winner?(bet) == FALSE
+						= form_for bet do |f|
+							= select_tag :winner, options_for_select([["#{name(bet.user1)}", bet.user1], ["#{name(bet.user2)}", bet.user2]]), options = {:prompt => "Select Winner"}
+							%input{:class => "form-group", :type => "hidden", :value => bet.wager, :name => :@wager}
+							= f.submit "winner", :class => "btn btn-default", :value => "Save Winner"
+					- else 
+						#{winner(bet.winner)}
+				%td
+					=  "#{number_to_currency(bet.wager)}"
+</table>
+
+%h3 You owe:
+
+%table#owe{:class => "table table-hover", :border => "1", :align => "center"}
+	%tr
+		%th Opponent
+		%th Group
+		%th Bet
+		%th Winner
+		%th Payment
+
+		%tbody
+		- @owe.each do |bet|
+			%tr
+				%td #{opponent(@user, bet)}
+				%td #{group_name(bet)}
+				%td 
+					= link_to "#{bet.prop}", bet_url(bet.id)
+				%td
+					- if winner?(bet) == FALSE
+						= form_for bet do |f|
+							= select_tag :winner, options_for_select([["#{name(bet.user1)}", bet.user1], ["#{name(bet.user2)}", bet.user2]]), options = {:prompt => "Select Winner"}
+							%input{:class => "form-group", :type => "hidden", :value => bet.wager, :name => :@wager}
+							= f.submit "winner", :class => "btn btn-default", :value => "Save Winner"
+					- else 
+						#{winner(bet.winner)}
+				%td
+					=link_to "Pay #{number_to_currency(bet.wager)}", pay_bet_url(bet.id)
+</table>
